@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">MAPP</string>
+
+//Text Views
+
+    <string name="loginText">Log In</string>
+    <string name="mainScreenText">DASPOS LAS-10</string>
+    <string name="usernameText">Username</string>
+    <string name="passwordText">Password</string>
+    <string name="myText">Password</string>
+    <string name="filterText">Filter Status</string>
+    <string name="gasText">Gas Status</string>
+//Inputs
+
+    <string name="usernameInput"></string>
+
+//Buttons
+
+    <string name="signInButton">Sign In</string>
+    <string name="recoverPassButton">Recover Password</string>
+    <string name="systemOverviewButton">System Overview</string>
+    <string name="listOfAccountsButton">List of Accounts</string>
+    <string name="contactButton">Contact Support</string>
+    <string name="signOutButton">Sign Out</string>
+    <string name="setupButton">Setup</string>
+
+</resources>
