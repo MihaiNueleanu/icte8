@@ -1,0 +1,53 @@
+<% if (user) { %>
+<!doctype>
+<html lang="en">
+<head>
+	<title>DASPOS</title>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" href="/chosen/chosen.css">
+	<link rel="stylesheet" href="administrator/static/css/default.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+</head>
+<body ng-app="suse">
+	<nav class="navbar navbar-default">
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu" aria-expanded="false">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="#/">DASPOS</a>
+	    </div>
+	    <div class="collapse navbar-collapse" id="main-menu">
+	      <ul class="nav navbar-nav">
+	        <li><a href="#companies">Companies</a></li>
+	        <li><a href="#users">User Accounts</a></li>
+	        <li><a href="#"></a></li>
+	      </ul>
+	      <p class="navbar-text pull-right">Logged in as: <%= user.username %></p>
+	    </div>
+	</nav>
+
+	<div class="container" ng-view></div>
+
+	<!-- Scripts -->
+	<script src="/jquery/dist/jquery.js"></script>
+	<script src="/bootstrap/dist/js/bootstrap.js"></script>
+	<script src="/chosen/chosen.jquery.js"></script>
+	<script src="/angular/angular.js"></script>
+	<script src="/angular-route/angular-route.js"></script>
+	<script src="administrator/static/ng.suse.js"></script>
+	<script src="administrator/static/controllers/companiesCtrl.js"></script>
+	<script src="administrator/static/controllers/usersCtrl.js"></script>
+	
+</body>
+</html>
+<% } else { %>
+	<p>You are currently not logged in. Please <a href="/administrator/login">login</a> or register</p>
+<% }%>
