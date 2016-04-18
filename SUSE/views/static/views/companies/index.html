@@ -1,2 +1,9 @@
 <h1>Companies</h1>
 <p class="lead">This is where we'll display the list of companies</p>
+<a href="#/company/new" class="btn btn-primary btn-lg">Add new company</a>
+
+<div ng-repeat="company in companies" class="row">
+	
+	<div class="col-md-6"><a href="#/company/{{company._id}}">{{company.name}}</a></div>
+	<div class="col-md-6">{{company.description}}</div>
+</div>

@@ -14,6 +14,11 @@ var express             = require('express'),
   passportLocalMongoose = require('passport-local-mongoose');
 
 /*****************************************************************/
+/** MODELS                                                        /
+/*****************************************************************/
+var Account = require('../models/account.js');
+
+/*****************************************************************/
 /** ROUTING                                                       /
 /*****************************************************************/
 //Render registration page
@@ -59,10 +64,10 @@ router.get('/administrator/logout', function(req, res) {
 //Render administrator page
 router.get('/administrator', function(req,res){
 	if(req.user){
-    	res.render('administrator', {user: req.user});
-  	}else{
-    	res.redirect("/administrator/login");
-  	}
+  	res.render('administrator', {user: req.user});
+	}else{
+  	res.redirect("/administrator/login");
+	}
 });
 
 router.use('/administrator/static', express.static('views/static'));
