@@ -1,9 +1,20 @@
 <h1>Companies</h1>
 <p class="lead">This is where we'll display the list of companies</p>
-<a href="#/company/new" class="btn btn-primary btn-lg">Add new company</a>
-
-<div ng-repeat="company in companies" class="row">
-	
-	<div class="col-md-6"><a href="#/company/{{company._id}}">{{company.name}}</a></div>
-	<div class="col-md-6">{{company.description}}</div>
-</div>
+<a href="#/company/new" class="btn btn-primary btn-lg pull-right">Add new company</a>
+<br><br>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Description</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="company in companies">
+			<td><a href="#">{{company.name}}</a></td>
+			<td>{{company.description}}</td>
+			<td><a class="pull-right btn btn-sm btn-default" href="#/company/{{company._id}}">Edit</a></td>
+		</tr>
+	</tbody>
+</table>
