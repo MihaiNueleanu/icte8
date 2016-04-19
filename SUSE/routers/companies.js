@@ -82,6 +82,7 @@ router.post('/company/:id', function(req, res) {
   if (req.user){
     var id = req.params.id;
     var data = req.body;
+    delete data._id;
 
     Company.findOneAndUpdate({ '_id': id }, data, function (err, results) {
       console.log('update resource');
