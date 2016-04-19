@@ -19,10 +19,10 @@ var express               = require('express'),
 var Account = require('../models/account.js');
 var Company = require('../models/company.js');
 
-/*****************************************************************/
-/** ROUTING                                                       /
-/*****************************************************************/
-//Get companies list
+
+/*****************************************************************
+** GET Companies
+*****************************************************************/
 router.get('/companies', function(req, res) {
 	if(req.user){
 		
@@ -43,23 +43,66 @@ router.get('/companies', function(req, res) {
 		})
 		.limit(limit)
 		.skip(skip);
-	}else{
+	} else {
 		res.status(500).send('Failed. Your request is not authentified');
 	}
 });
 
-//Get individual question
+
+/*****************************************************************
+** GET Company > LADs
+*****************************************************************/
+//
+router.get('/company/:id/lads/', function(req, res) {
+  if (req.user){
+    var id = req.params.id;
+    Company.findOne({ '_id': id }, function (err, results) {
+        if(err) { console.log(err); }    
+        res.send(results); 
+    });
+  } else {
+    res.status(500).send('Failed. Your request is not authentified');
+  }
+});
+
+
+/*****************************************************************
+** GET LAD
+*****************************************************************/
+router.get('/company/:companyId/lad/:ladId', function(req, res) {
+  if (req.user){
+    var companyId = req.params.companyId;
+    var ladId = req.params.ladId;
+    
+    Company.findById(companyId, function (err, company) {
+      var lad = company.lads.id(ladId);
+      if(err) { console.log(err); }    
+      res.send(lad);     
+    });
+
+  } else {
+    res.status(500).send('Failed. Your request is not authentified');
+  }
+});
+
+
+/*****************************************************************
+** GET Company - Limited
+*****************************************************************/
 router.get('/company/:id', function(req, res) {
     if (req.user){
         var id = req.params.id;
-        Company.findOne({ '_id': id }, function (err, results) {
+        Company.findOne({ '_id': id },{name:1,description:1}, function (err, results) {
             if(err) { console.log(err); }    
             res.send(results); 
         });
     }
 });
 
-//Save new Company
+
+/*****************************************************************
+** ADD Company
+*****************************************************************/
 router.post('/company/new', function(req, res) {
   if (req.user){
     var item = mongoose.model("Company",Company);
@@ -77,7 +120,60 @@ router.post('/company/new', function(req, res) {
   }
 });
 
-//Update individual question
+
+/*****************************************************************
+** UPDATE LAD
+*****************************************************************/
+router.post('/company/:companyId/lad/:ladId', function(req, res) {
+  if (req.user){
+    var companyId = req.params.companyId;
+    var ladId = req.params.ladId;
+    var data = req.body;
+
+    Company.findOneAndUpdate({ '_id': ladId }, data, function (err, results) {
+      console.log('update resource');
+      if(err) { console.log(err); }
+      res.send('Success. Resource Updated'); 
+    });
+  } else {
+    res.status(500).send('Failed. Your request is not authentified');
+  }
+});
+
+/*****************************************************************
+** PUSH LAD Data
+*****************************************************************/
+router.post('/company/:companyId/lad/:ladId/detector/:detectorId', function(req, res) {
+  //if (req.user){
+    var companyId   = req.params.companyId;
+    var ladId       = req.params.ladId;
+    var detectorId  = req.params.detectorId;
+    var data        = req.body;
+
+    Company.findById(companyId,function(err,company){
+      company.lads.id(ladId).detector.id(detectorId).data.push({
+        oil : data.oil,
+        gas : data.gas,
+        smoke : data.smoke,
+        pressure : data.pressure
+      });
+      company.save(function (err) {
+        if (err) return handleError(err)
+        console.log('Success!');
+        console.log(data);
+        res.status(200).send('Success');
+      });
+    })
+
+  //} else {
+  //  res.status(500).send('Failed. Your request is not authentified');
+  //}
+});
+
+
+/*****************************************************************
+** UPDATE Company
+*****************************************************************/
 router.post('/company/:id', function(req, res) {
   if (req.user){
     var id = req.params.id;
@@ -93,7 +189,5 @@ router.post('/company/:id', function(req, res) {
     res.status(500).send('Failed. Your request is not authentified');
   }
 });
-
-
 
 module.exports = router;

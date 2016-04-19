@@ -1,0 +1,30 @@
+<h1>{{lad.name}}</h1>
+<span class="label label-default">Serial No: {{lad.serialNumber}}</span>
+<div ng-repeat="detector in lad.detector">
+	<h3>{{detector.name}}</h3>
+	<span>Serial No: {{detector.serialNumber}}</span>
+	
+	<hchart style="width:1140px" options="chartOptions">Placeholder for generic chart</hchart>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Date</th>
+				<th>Time</th>
+				<th>Oil</th>
+				<th>Gas</th>
+				<th>Smoke</th>
+			</tr>	
+		</thead>
+		<tbody>
+			<tr ng-repeat="item in detector.data">
+				<td>{{item.timestamp | date:'d-MM-y'}}</td>
+				<td>{{item.timestamp | date:'H:mm:ss '}}</td>
+				<td>{{item.oil}}%</td>
+				<td>{{item.gas}}%</td>
+				<td>{{item.smoke}}%</td>
+			</tr>	
+		</tbody>
+	</table>
+
+</div>

@@ -3,7 +3,22 @@ var mongoose = require('mongoose'),
 
 var Company = new Schema({
 	name: String,
-	description: String
+	description: String,
+	lads: [{
+		serialNumber:String,
+		name:String,
+		detector:[{
+			serialNumber:String,
+			name: String,
+			data: [{
+				timestamp: { type: Date, default: Date.now },
+				oil: Number,
+				gas: Number,
+				smoke: Number,
+				pressure: Number
+			}]
+		}]
+	}]
 });
 
 module.exports = mongoose.model('Company', Company);

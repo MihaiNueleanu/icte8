@@ -3,7 +3,9 @@
 	var app = angular.module('suse', [
 		'companiesCtrl',
 		'companyCtrl',
-		'usersCtrl'
+		'usersCtrl',
+		'ladsCtrl',
+		'ladCtrl'
 	]);
 
 	/* configuring route provider (views) */
@@ -19,10 +21,18 @@
 	        templateUrl: 'administrator/static/views/company/index.html',
 	        controller: 'companyCtrl'
 	    })
+	    .when('/company/:companyId/lad/:ladId', {
+	        templateUrl: 'administrator/static/views/lad/index.html',
+	        controller: 'ladCtrl'
+	    })
+	    .when('/company/:id/lads', {
+	        templateUrl: 'administrator/static/views/lads/index.html',
+	        controller: 'ladsCtrl'
+	    })
 	    .when('/company/:id', {
 	        templateUrl: 'administrator/static/views/company/index.html',
 	        controller: 'companyCtrl'
-	    })
+	    })	   
 	    .when('/users', {
 	        templateUrl: 'administrator/static/views/users/index.html',
 	        controller: 'usersCtrl'

@@ -1,0 +1,22 @@
+<h1>{{company.name}} LADs</h1>
+<p class="lead">This is where we'll display the list of LADs</p>
+<a href="#/company/{{companyId}}/lads/new" class="btn btn-primary btn-lg pull-right">Add new LAD</a>
+<br><br>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Serial Number</th>
+			<th># Detectors </th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="lad in company.lads">
+			<td><a href="#/company/{{companyId}}/lad/{{lad._id}}">{{lad.name}}</a></td>
+			<td>{{lad.serialNumber}}</td>
+			<td>{{lad.detector.length}}</td>
+			<td><a class="pull-right btn btn-xs btn-default" href="#/company/{{company._id}}">Edit</a></td>
+		</tr>
+	</tbody>
+</table>
