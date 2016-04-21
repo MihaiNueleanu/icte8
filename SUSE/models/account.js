@@ -3,8 +3,9 @@ var mongoose = require('mongoose'),
 	passportLocalMongoose = require('passport-local-mongoose');
 
 var Account = new Schema({
-  nickname: String,
-  birthdate: Date
+	company: Schema.Types.ObjectId,
+	active: { type: Boolean, default: false },
+	superuser: { type: Boolean, default: false }
 });
 
 Account.plugin(passportLocalMongoose);

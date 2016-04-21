@@ -17,6 +17,18 @@ var express             = require('express'),
 /** MODELS                                                        /
 /*****************************************************************/
 var Account = require('../models/account.js');
+var Company = require('../models/company.js');
+
+/*****************************************************************/
+/** Functions                                                     /
+/*****************************************************************/
+function companyByName(companyName,callback) {
+  Company.findOne({ name: companyName },{name:1,description:1}, function (err, results) {
+      if(err) { console.log(err); }      
+      console.log(results);
+      callback(results);
+  });
+}
 
 /*****************************************************************/
 /** ROUTING                                                       /
@@ -28,17 +40,27 @@ router.get('/administrator/register', function(req, res) {
 
 //Register new user
 router.post('/administrator/register', function(req, res, next) {
-  console.log('registering user');
-  Account.register(new Account({username: req.body.username}), req.body.password, function(err) {
-    if (err) {
-      console.log('error while user register!', err);
-      return next(err);
+  companyByName(req.body.companyName,function(company){
+    if(company != null){
+      console.log('company exists');
+      Account.register(new Account({
+        username: req.body.username,
+        company: company._id
+      }), req.body.password, function(err) {
+        if (err) {
+          console.log('error while user register!', err);
+          return next(err);
+        }
+        console.log('user registered!');
+        res.redirect('/administrator');
+      });  
+    } else {
+      console.log('company doesnt exists');
+      res.redirect('/administrator/register');
     }
-
-    console.log('user registered!');
-
-    res.redirect('/administrator');
   });
+
+  
 });
 
 //Render login page
@@ -58,7 +80,7 @@ router.post('/administrator/login', passport.authenticate('local'), function(req
 //Logout
 router.get('/administrator/logout', function(req, res) {
   req.logout();
-  res.redirect('/');
+  res.redirect('/administrator');
 });
 
 //Render administrator page

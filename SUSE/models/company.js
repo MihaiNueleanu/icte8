@@ -17,6 +17,9 @@ var Company = new Schema({
 				smoke: Number,
 				pressure: Number
 			}]
+		}],
+		localUserAccounts:[{
+			userName: String
 		}]
 	}]
 });

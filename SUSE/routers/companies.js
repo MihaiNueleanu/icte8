@@ -30,10 +30,14 @@ router.get('/companies', function(req, res) {
 		var skip = parseInt(req.param('skip'));
 		var search = {};
 
-		if(req.param('search') && req.param('search')!='' && req.param('search').length > 3){
-			search = { $text : { $search : req.param('search') }}; 
-		}
-		console.log(search);
+    console.log('company - '+ req.user.company);
+
+		if(!req.user.superuser){
+      console.log('not superuser');
+			search = { _id : req.user.company }; 
+		} else {
+      console.log('superuser');
+    }
 
 		Company.find(search, {}, function (err, results) {
 			if(err) {
@@ -52,7 +56,6 @@ router.get('/companies', function(req, res) {
 /*****************************************************************
 ** GET Company > LADs
 *****************************************************************/
-//
 router.get('/company/:id/lads/', function(req, res) {
   if (req.user){
     var id = req.params.id;
@@ -87,6 +90,23 @@ router.get('/company/:companyId/lad/:ladId', function(req, res) {
 
 
 /*****************************************************************
+** GET Company - by name
+*****************************************************************/
+router.get('/company', function(req, res) {
+  companyByName(req.query.companyName,function(company){
+    res.send(company);
+  });
+});
+
+//Reusable function
+function companyByName(companyName,callback) {
+  Company.findOne({ name: companyName },{name:1,description:1}, function (err, results) {
+      if(err) { console.log(err); }      
+      callback(results);
+  });
+}
+
+/*****************************************************************
 ** GET Company - Limited
 *****************************************************************/
 router.get('/company/:id', function(req, res) {
@@ -98,7 +118,6 @@ router.get('/company/:id', function(req, res) {
         });
     }
 });
-
 
 /*****************************************************************
 ** ADD Company
