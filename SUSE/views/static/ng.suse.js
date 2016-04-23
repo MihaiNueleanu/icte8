@@ -3,9 +3,9 @@
 	var app = angular.module('suse', [
 		'companiesCtrl',
 		'companyCtrl',
-		'usersCtrl',
 		'ladsCtrl',
-		'ladCtrl'
+		'ladCtrl',
+		'accountsCtrl'
 	]);
 
 	/* configuring route provider (views) */
@@ -33,9 +33,9 @@
 	        templateUrl: 'administrator/static/views/company/index.html',
 	        controller: 'companyCtrl'
 	    })	   
-	    .when('/users', {
-	        templateUrl: 'administrator/static/views/users/index.html',
-	        controller: 'usersCtrl'
+	    .when('/accounts', {
+	        templateUrl: 'administrator/static/views/accounts/index.html',
+	        controller: 'accountsCtrl'
 	    });
 	}]);
 

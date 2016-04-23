@@ -1,0 +1,20 @@
+<h1>User Accounts</h1>
+<p class="lead">This is where we'll display the list of User Accounts</p>
+
+<br><br>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Username</th>
+			<th>Active</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="account in accounts">
+			<td>{{account.username}}</td>
+			<td>{{account.active}}</td>
+			<td><a class="pull-right btn btn-xs btn-default" href="#/account/{{company._id}}">Edit</a></td>
+		</tr>
+	</tbody>
+</table>

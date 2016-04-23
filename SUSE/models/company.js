@@ -16,7 +16,10 @@ var Company = new Schema({
 				gas: Number,
 				smoke: Number,
 				pressure: Number
-			}]
+			}],
+			status:Boolean,
+			level:Boolean,
+			high: Number
 		}],
 		localUserAccounts:[{
 			userName: String

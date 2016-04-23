@@ -30,8 +30,6 @@ router.get('/companies', function(req, res) {
 		var skip = parseInt(req.param('skip'));
 		var search = {};
 
-    console.log('company - '+ req.user.company);
-
 		if(!req.user.superuser){
       console.log('not superuser');
 			search = { _id : req.user.company }; 
