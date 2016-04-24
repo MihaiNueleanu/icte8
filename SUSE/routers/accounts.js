@@ -123,25 +123,42 @@ router.get('/accounts', function(req,res){
       console.log('superuser');
     }
 
-    Account.find(search, {}, function (err, accounts) {
-      if(err) { console.log(err); }
-      
-      accounts.forEach(function(account,index) {
+    Account
+    .find(search)
+    .populate('company','name')
+    .exec(function(err, accounts){
+      if(err) {res.writeHead(500, err.message)}
+      res.send(accounts);
+    });
 
-        if(account.superuser == false){
-          Company.findById(account.company,function(err,company){          
-            accounts[index].companyName = company.name;            
-            if(index === accounts.length -1){
-              console.log('flag');
-              res.status(200).send(accounts);
-              console.log(accounts);
-            }
-          });
-        }
-      });
-    })
-    .limit(limit)
-    .skip(skip);
+  }else{
+    res.status(500).send('Failed. Your request is not authentified');
+  }
+});
+
+/*****************************************************************
+** GET Single User Account by ID
+*****************************************************************/
+router.get('/account/:id', function(req,res){
+  if(req.user){
+    var id = req.params.id;
+    var search = {};
+
+    if(!req.user.superuser){
+      console.log('not superuser');
+      search = { company : req.user.company }; 
+    } else {
+      console.log('superuser');
+    }
+
+    Account
+    .findOne({"_id":id})
+    .populate('company','name')
+    .exec(function(err, account){
+      console.log(account);
+      if (err) return handleError(err)
+      res.status(200).send(account);
+    });
 
   }else{
     res.status(500).send('Failed. Your request is not authentified');

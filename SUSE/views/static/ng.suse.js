@@ -5,7 +5,8 @@
 		'companyCtrl',
 		'ladsCtrl',
 		'ladCtrl',
-		'accountsCtrl'
+		'accountsCtrl',
+		'accountCtrl'
 	]);
 
 	/* configuring route provider (views) */
@@ -36,6 +37,10 @@
 	    .when('/accounts', {
 	        templateUrl: 'administrator/static/views/accounts/index.html',
 	        controller: 'accountsCtrl'
+	    })
+	    .when('/account/:id', {
+	        templateUrl: 'administrator/static/views/account/index.html',
+	        controller: 'accountCtrl'
 	    });
 	}]);
 

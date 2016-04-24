@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
 	passportLocalMongoose = require('passport-local-mongoose');
 
 var Account = new Schema({
-	company: Schema.Types.ObjectId,
+	company: { type : Schema.Types.ObjectId, ref : 'Company' },
 	active: { type: Boolean, default: false },
 	superuser: { type: Boolean, default: false }
 });

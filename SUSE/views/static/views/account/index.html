@@ -1,0 +1,10 @@
+<h1>Account Edit</h1>
+<form>
+	<h3>User Name: {{account.username}}</h3>
+	<p>Superuser: {{account.superuser}}</p>
+	<p>Active: {{account.active}}</p>
+	<p>Company: {{account.company.name}}</p>
+</form>
+
+<button class="btn btn-success" ng-if="isNew==true" ng-click="saveNewItem()">Save new item</button>
+<button class="btn btn-success" ng-if="isNew==false" ng-click="saveItem()">Save item</button>

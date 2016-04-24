@@ -7,13 +7,18 @@
 		<tr>
 			<th>Username</th>
 			<th>Active</th>
+			<th>Company</th>
 			<th></th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr ng-repeat="account in accounts">
-			<td>{{account.username}}</td>
-			<td>{{account.active}}</td>
+			<td><a href="/administrator#/account/{{account._id}}">{{account.username}}</a></td>
+			<td>
+				<i class="fa fa-times" ng-if="account.active != true"></i>
+				<i class="fa fa-check" ng-if="account.active == true"></i>
+			</td>
+			<td>{{account.company.name}}</td>
 			<td><a class="pull-right btn btn-xs btn-default" href="#/account/{{company._id}}">Edit</a></td>
 		</tr>
 	</tbody>
