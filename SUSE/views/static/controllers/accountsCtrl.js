@@ -9,7 +9,7 @@ angular.module('accountsCtrl', ['ngRoute'])
 	$scope.isNew = false; 
 
 	//URLs
-	var url = '//localhost:2000/accounts/';
+	var url = '/accounts/';
 
     //Loading LADs into the page
     $http.get(url).success(function(data) {

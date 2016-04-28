@@ -10,8 +10,8 @@ angular.module('ladsCtrl', ['ngRoute'])
 	$scope.isNew = false; 
 
 	//URLs
-	var url = '//localhost:2000/company/'+ $scope.companyId +'/lads';
-	var urlNew = '//localhost:2000/company/'+ $scope.companyId +'/lads/new';
+	var url = '/company/'+ $scope.companyId +'/lads';
+	var urlNew = '/company/'+ $scope.companyId +'/lads/new';
 
     //Loading LADs into the page
     $http.get(url).success(function(data) {

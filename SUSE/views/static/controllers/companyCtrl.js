@@ -10,8 +10,8 @@ angular.module('companyCtrl', ['ngRoute'])
 	$scope.isNew = false; 
 
 	//URLs
-	var url = '//localhost:2000/company/';
-	var urlNew = '//localhost:2000/company/new';
+	var url = '/company/';
+	var urlNew = '/company/new';
 
     //Loading company into the page
     if($scope.id != 'new' && $scope.id){

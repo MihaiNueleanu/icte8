@@ -19,8 +19,8 @@ angular.module('ladCtrl', ['ngRoute'])
 
 
 	//URLs
-	var url = '//localhost:2000/company/' + $scope.companyId + '/lad/' + $scope.ladId;
-    var urlNew = '//localhost:2000/company/' + $scope.companyId + '/lad/new' ;
+	var url = '/company/' + $scope.companyId + '/lad/' + $scope.ladId;
+    var urlNew = '/company/' + $scope.companyId + '/lad/new' ;
 
     //Loading company into the page
     if($scope.ladId != 'new' && $scope.ladId){

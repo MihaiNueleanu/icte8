@@ -9,7 +9,7 @@ angular.module('companiesCtrl', ['ngRoute'])
 	$scope.companies = {};
 
 	//URLs
-	var url = '//localhost:2000/companies/';
+	var url = '/companies/';
 
     $http.get(url).success(function(data) {
         $scope.companies = data;

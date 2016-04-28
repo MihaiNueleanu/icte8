@@ -9,7 +9,7 @@ angular.module('accountCtrl', ['ngRoute'])
 	$scope.account = {};
 
 	//URLs
-	var url = '//localhost:2000/account/';
+	var url = '/account/';
 
     //Loading account into the page
     $http.get(url + $scope.id).success(function(data) {
