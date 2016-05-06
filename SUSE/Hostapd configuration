@@ -1,0 +1,45 @@
+
+In order for the Nodejs module to work, it needs access to the services that will make calls to
+
+> sudo apt-get install -y hostapd dnsmasq
+
+Configuration of hostapd:
+> sudo cp /etc/hostapd/hostapd.conf /etc/hostapd/hostapd.original
+> sudo nano /etc/hostapd/hostapd.conf
+
+You copy/paste this whole thing in the file that is open, with nothing else in it ( no spaces, #-es or anything else)
+
+interface=wlan0
+driver=nl80211
+ssid=DASPOS
+hw_mode=g
+channel=6
+ieee80211n=1
+macaddr_acl=0
+auth_algs=1
+ignore_broadcast_ssid=0
+wpa=2
+wpa_key_mgmt=WPA-PSK
+wpa_passphrase=testingthelads
+rsn_pairwise=CCMP
+
+Check if everything went well:
+
+> sudo /usr/sbin/hostapd /etc/hostapd/hostapd.conf
+
+If there're any errors, it will complain about them and tell you on what lines.
+Now let's make it persistant:
+
+> sudo nano /etc/default/hostapd
+
+Find the line that has 
+
+DAEMON_CONF=""
+
+and replace with
+
+DAEMON_CONF="/etc/hostapd/hostapd.conf"
+
+Then we make sure the service is started with
+
+> sudo service hostapd start
